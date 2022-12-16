@@ -58,7 +58,7 @@ api_key = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
 #             sohwan = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + league_df['summonerName'].iloc[i] + '?api_key=' + api_key 
 #             r = requests.get(sohwan)
             
-#         account_id = r.json()['accountId']
+#         account_id = r.json()['puuid']
 #         league_df.iloc[i, -1] = account_id
 
 #     except:
@@ -66,6 +66,8 @@ api_key = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
 
 # league_df.to_csv("챌데이터.csv", index=False, encoding="utf-8")  # 중간저장
 
+
+# TODO - 챌데이터 파일에 티어, puuid, 닉네임 등 모아서 ㄱ
 f = open('챌데이터.csv','r')
 rdr = csv.reader(f)
 
@@ -74,26 +76,29 @@ league_df3 = pd.DataFrame(rdr)
 match_info_df = pd.DataFrame()
 season = str(13)
 
-print(league_df3)
+# https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/SVKthZG8JyOFBmAvcTOwmn21DDODkFoVueWSXy3XOBoA3lDDn8VX5KLWT-IhawFakvqLdg7xj7i6Ng/ids?startTime=0&endTime=9999999999&start=0&count=100&api_key=RGAPI-88ac3bfa-6138-474a-9fe0- 83d835caaa57
+# 위의 링크로 보내야 함
+print()
+match0 = 'https://kr.api.riotgames.com/lol/match/v5/matchs/by-puuid/' + league_df3[9].iloc[1]  +'?season=' + season + '&api_key=' + api_key
+print(match0)
 
-for i in range(len(league_df3)):
-    print(league_df3['accountId'].iloc[i])
+# for i in range(len(league_df3)):
+#     print(league_df3)
     
-    # match0 = 'https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/' + league_df3['accountId'].iloc[i]  +'?season=' + season + '&api_key=' + api_key
-    # print(match0)
+#     print(match0)
     
-    # try:
-    #     r = requests.get(match0)
+#     try:
+#         r = requests.get(match0)
         
-    #     while r.status_code == 429:
-    #         time.sleep(5)
-    #         match0 = 'https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/' + league_df3['account_id'].iloc[i]  +'?season=' + season + '&api_key=' + api_key
-    #         r = requests.get(match0)
+#         while r.status_code == 429:
+#             time.sleep(5)
+#             match0 = 'https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/' + league_df3['account_id'].iloc[i]  +'?season=' + season + '&api_key=' + api_key
+#             r = requests.get(match0)
         
-    #     match_info_df = pd.concat([match_info_df, pd.DataFrame(r.json()['matches'])])
+#         match_info_df = pd.concat([match_info_df, pd.DataFrame(r.json()['matches'])])
     
-    # except:
-    #     print(i)
+#     except:
+#         print(i)
 
 
 
