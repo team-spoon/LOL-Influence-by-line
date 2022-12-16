@@ -1,7 +1,21 @@
+import requests
+from pprint import pprint
+
 KEY = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
 baseUrl = "https://kr.api.riotgames.com"
 
-userName = input()
-getUserDataUrl = baseUrl + f"/lol/summoner/v4/summoners/by-name/{userName}?api_key={KEY}"
+leagues = [
+  "challengerleagues",
+  "grandmasterleagues",
+  "masterleagues"
+]
+result = []
 
-print(getUserDataUrl)
+for league in leagues:
+  getProNicknameUrl = baseUrl + f"/lol/league/v4/{league}/by-queue/RANKED_SOLO_5x5?api_key={KEY}"
+  r = requests.get(getProNicknameUrl).json()
+  for response in r['entries']:
+    if response['veteran']:
+      result.append(response["summonerName"])
+
+pprint(result)
