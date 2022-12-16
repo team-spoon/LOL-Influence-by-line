@@ -7,15 +7,15 @@ baseUrl = "https://kr.api.riotgames.com"
 leagues = [
   "challengerleagues",
   "grandmasterleagues",
-  "masterleagues"
+  # "masterleagues"
 ]
-result = []
+f = open("proNickname.txt", 'w')
 
 for league in leagues:
   getProNicknameUrl = baseUrl + f"/lol/league/v4/{league}/by-queue/RANKED_SOLO_5x5?api_key={KEY}"
   r = requests.get(getProNicknameUrl).json()
   for response in r['entries']:
     if response['veteran']:
-      result.append(response["summonerName"])
+      f.write(response["summonerName"] + '\n')
 
-pprint(result)
+f.close()
