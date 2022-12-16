@@ -1,7 +1,9 @@
-KEY = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
-baseUrl = "https://kr.api.riotgames.com"
+f = open('proNickname.txt', 'r')
 
-userName = input()
-getUserDataUrl = baseUrl + f"/lol/summoner/v4/summoners/by-name/{userName}?api_key={KEY}"
-
-print(getUserDataUrl)
+print('[', end=' ')
+while True:
+    line = f.readline()
+    if not line: break
+    print("'"+line+"', ", end=' ')
+print(']', end=' ')
+f.close()
