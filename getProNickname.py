@@ -13,7 +13,7 @@ f = open("proNickname.txt", 'w')
 result = []
 
 for league in leagues:
-  getProNicknameUrl = baseUrl + f"/lol/league/v4/{league}/by-queue/RANKED_SOLO_5x5?api_key={KEY}"
+  getProNicknameUrl = f"{baseUrl}/lol/league/v4/{league}/by-queue/RANKED_SOLO_5x5?api_key={KEY}"
   r = requests.get(getProNicknameUrl).json()
   for response in r['entries']:
     if response['veteran']:
