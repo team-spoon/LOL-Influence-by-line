@@ -1,7 +1,7 @@
 import requests
 from pprint import pprint
 
-KEY = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
+KEY = "RGAPI-936fbe44-a27a-4aaf-96c0-9a9ae3df5159"
 baseUrl = "https://kr.api.riotgames.com"
 
 leagues = [

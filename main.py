@@ -5,7 +5,7 @@ import urllib
 import time
 import csv
 
-api_key = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
+api_key = "RGAPI-936fbe44-a27a-4aaf-96c0-9a9ae3df5159"
 # sohwan = (
 #     "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/"
 #     + "hide on bush"

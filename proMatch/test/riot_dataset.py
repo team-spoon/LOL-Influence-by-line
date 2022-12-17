@@ -1,7 +1,7 @@
 def riot_timeline_dataset(pre_dataset,api_key,timeline):
     
     challenger_game = pre_dataset
-    my_api = api_key
+    my_api = "RGAPI-936fbe44-a27a-4aaf-96c0-9a9ae3df5159"
     
     
     #수집할 컬럼 정의

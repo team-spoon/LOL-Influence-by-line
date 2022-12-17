@@ -2,7 +2,7 @@ import requests
 from pprint import pprint
 import json
 
-KEY = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
+KEY = "RGAPI-936fbe44-a27a-4aaf-96c0-9a9ae3df5159"
 baseUrl = "https://asia.api.riotgames.com"
 
 proPUUID = ['aYZCUruerjylcvYZlQDEr6d5r-MxjuKUG-breok6JQbWl3csfiwkpr46fjJfV8iulB-8EVs8liBZRA',
