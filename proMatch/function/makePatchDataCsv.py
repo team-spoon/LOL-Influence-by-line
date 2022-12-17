@@ -2,7 +2,7 @@ from pprint import pprint
 import requests
 import pandas as pd
 
-from getPatchData import getItemPatchData
+from getPatchData import getItemPatchDataV1, getItemPatchDataV2
 
 versionList = [
     '12-17',
@@ -16,6 +16,9 @@ versionList = [
 ]
 
 for version in versionList:
-    data = getItemPatchData(version)
+    if version == '12-17':
+        data = getItemPatchDataV1(version)
+    else:
+        data = getItemPatchDataV2(version)
     pprint("-------"+version+"-------")
     pprint(data if data else "아이템 변경점이 존재하지 않습니다.")
