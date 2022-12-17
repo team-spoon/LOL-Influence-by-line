@@ -4,16 +4,18 @@ import pandas as pd
 
 from getPatchData import getItemPatchData
 
-pprint(getItemPatchData("12-17"))
+versionList = [
+    '12-17',
+    '12-18',
+    '12-19',
+    '12-20',
+    '12-21',
+    '12-22',
+    '12-23',
+    '12-24',
+]
 
-
-pprint(getItemPatchData("12-18"))
-pprint(getItemPatchData("12-19"))
-pprint(getItemPatchData("12-20"))
-pprint(getItemPatchData("12-21"))
-pprint(getItemPatchData("12-22"))
-pprint(getItemPatchData("12-23"))
-
-
-print('404 test')
-pprint(getItemPatchData("12-24"))
+for version in versionList:
+    data = getItemPatchData(version)
+    pprint("-------"+version+"-------")
+    pprint(data if data else "아이템 변경점이 존재하지 않습니다.")
