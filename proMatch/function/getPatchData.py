@@ -2,6 +2,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from pprint import pprint
+import requests
 
 item_list = ['장화',
              '요정의 부적',
@@ -211,7 +212,7 @@ item_list = ['장화',
              '심연의 가면']
 
 
-def init():  # 초기화
+def init(version):  # 초기화
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
@@ -219,7 +220,7 @@ def init():  # 초기화
     driver = webdriver.Chrome('chromedriver')
     driver.implicitly_wait(1)
     driver.get(
-        "https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-12-17-notes/")
+        f"https://www.leagueoflegends.com/ko-kr/news/game-updates/patch-{version}-notes/")
     html = driver.page_source
     bs = BeautifulSoup(html, "html.parser")
     return bs.body \
@@ -238,8 +239,8 @@ def isItem(item_name: str):  # 해당 패치에서 변경된 항목 중 아이�
 result = []
 
 
-def getItemPatchData():  # 패치 정보 웹사이트 접속해서 아이템의 변경점을 출력한다
-    item_name = init()
+def getItemPatchData(version):  # 패치 정보 웹사이트 접속해서 아이템의 변경점을 출력한다
+    item_name = init(version)
     result = []
     for item in item_name:
         itemJson = {}
@@ -249,18 +250,23 @@ def getItemPatchData():  # 패치 정보 웹사이트 접속해서 아이템의 
             if isItem(item2.get_text()):
                 itemJson = {}
 
-                title = item.find_all(
-                    "h4", {"class", "change-detail-title ability-title"})
+                # before 12-17
+                # changeList = item.find_all(
+                #     "div", {"class", "attribute-change"})
+
+                # after 12-18
                 changeList = item.find_all(
-                    "div", {"class", "attribute-change"})
+                    "li")
+
                 result2 = []
+
                 for change in changeList:
                     result2.append(change.get_text().strip())
+
                 itemJson['name'] = item2.get_text().strip()
                 itemJson['changes'] = list(result2)
+
                 result.append(itemJson)
 
     return result
 
-
-pprint(getItemPatchData())
