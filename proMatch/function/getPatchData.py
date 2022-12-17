@@ -239,7 +239,34 @@ def isItem(item_name: str):  # 해당 패치에서 변경된 항목 중 아이�
 result = []
 
 
-def getItemPatchData(version):  # 패치 정보 웹사이트 접속해서 아이템의 변경점을 출력한다
+def getItemPatchDataV1(version):  # 패치 정보 웹사이트 접속해서 아이템의 변경점을 출력한다
+    item_name = init(version)
+    result = []
+    for item in item_name:
+        itemJson = {}
+        newItem = item.find_all("h3", {"class", "change-title"})  # 아이템 목록들
+        # print(newItem)
+        for item2 in newItem:
+            if isItem(item2.get_text()):
+                itemJson = {}
+
+                changeList = item.find_all(
+                    "div", {"class", "attribute-change"})
+
+                result2 = []
+
+                for change in changeList:
+                    result2.append(change.get_text().strip())
+
+                itemJson['name'] = item2.get_text().strip()
+                itemJson['changes'] = list(result2)
+
+                result.append(itemJson)
+
+    return result
+
+
+def getItemPatchDataV2(version):  # 패치 정보 웹사이트 접속해서 아이템의 변경점을 출력한다
     item_name = init(version)
     result = []
     for item in item_name:
