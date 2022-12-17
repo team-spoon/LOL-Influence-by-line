@@ -67,39 +67,37 @@ api_key = "RGAPI-88ac3bfa-6138-474a-9fe0-83d835caaa57"
 # league_df.to_csv("챌데이터.csv", index=False, encoding="utf-8")  # 중간저장
 
 
-# TODO - 챌데이터 파일에 티어, puuid, 닉네임 등 모아서 ㄱ
+# TODO - 챌데이터 시간 단위 뭔지 알아보기   
 f = open('챌데이터.csv','r')
-rdr = csv.reader(f)
-
-league_df3 = pd.DataFrame(rdr)
+challengerData = pd.DataFrame(csv.reader(f)) # 챌유저 puuid 저장된 csv
+puuid = challengerData[9]
 
 match_info_df = pd.DataFrame()
-season = str(13)
 
-# https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/SVKthZG8JyOFBmAvcTOwmn21DDODkFoVueWSXy3XOBoA3lDDn8VX5KLWT-IhawFakvqLdg7xj7i6Ng/ids?startTime=0&endTime=9999999999&start=0&count=100&api_key=RGAPI-88ac3bfa-6138-474a-9fe0- 83d835caaa57
-# 위의 링크로 보내야 함
-print(league_df3)
-match0 = 'https://kr.api.riotgames.com/lol/match/v5/matchs/by-puuid/' + league_df3[9].iloc[1]  +'?api_key=' + api_key
-print(match0)
+result = {'matchId': []}
+print(len(puuid))
+print(puuid)
+for i in range(1, len(puuid)):
+    try:
+        nowPuuid = puuid.iloc[i]
+        print(nowPuuid)
+        matchUrl = f'https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{nowPuuid}/ids?count=100&api_key={api_key}'
 
-# for i in range(len(league_df3)):
-#     print(league_df3)
-    
-#     print(match0)
-    
-#     try:
-#         r = requests.get(match0)
-        
-#         while r.status_code == 429:
-#             time.sleep(5)
-#             match0 = 'https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/' + league_df3['account_id'].iloc[i]  +'?season=' + season + '&api_key=' + api_key
-#             r = requests.get(match0)
-        
-#         match_info_df = pd.concat([match_info_df, pd.DataFrame(r.json()['matches'])])
-    
-#     except:
-#         print(i)
+        r = requests.get(matchUrl)
+        json = list(r.json()) # matchId 100개를 받아와서 for loop
+        for challengermatchId in json:
+            result['matchId'].append(challengermatchId) # matchId 행에 추가
 
+        while r.status_code == 429: # 호출 limit 예외처리
+            time.sleep(5)
+            sohwan = f'https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{nowPuuid}/ids?count=100&api_key={api_key}'
+            r = requests.get(sohwan)
+    except:
+        print('엄@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+
+match_info_df = pd.DataFrame(result)
+
+match_info_df.to_csv('챌경기.csv', index=False, encoding="utf-8")
 
 
 f.close()

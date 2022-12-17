@@ -1,4 +1,4 @@
-tier,puuid,summonerName,leaguePoints,wins,losses,veteran,inactive,freshBlood,hotStreak
+tier,accountId,summonerName,leaguePoints,wins,losses,veteran,inactive,freshBlood,puuid
 CHALLENGER,46qwf1-goYWMUpSdTj1sMwmTCU99zSqY7Knhb-ouw9-PqyCWVZidXuK9cQ,yuezhihuxi,1337,266,197,True,False,False,L6Ru3TiopZ2NhIQx_9sMUCkpTSWDnnMS3lRW9r84ZSr84k1XHQg0yfRJnFDI8hUqBvXitsoZkg_6eQ
 CHALLENGER,0iDTGwZ51SZg5-CPd3oYgzZZy1ELOaiX2pULCImyMz1m9z8,psavncav,1337,707,634,True,False,False,FWD3aK-z1ze0KzbaOh1Higc0VENk-uvJkHmVUSoErp0Ooml1m1yv2RTUXa6BKD2KZhRdgHEwQd-OmQ
 CHALLENGER,Qb_Vg16aHRca0iqZA6iOCHfrla-kfFCrmeSm8ce6X5pS6iY,hhhhbbbb,1233,567,499,True,False,False,XbGxW1pXKSD9k_EnySz8Es8Ufs6gKF_2w-7r6wpjVMQtWQgNeu7Ims1659MXkmEIE5_GqVMkNBZD0A
