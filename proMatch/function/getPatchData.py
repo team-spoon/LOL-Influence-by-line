@@ -245,7 +245,6 @@ def getItemPatchDataV1(version):  # 패치 정보 웹사이트 접속해서 아�
     for item in item_name:
         itemJson = {}
         newItem = item.find_all("h3", {"class", "change-title"})  # 아이템 목록들
-        # print(newItem)
         for item2 in newItem:
             if isItem(item2.get_text()):
                 itemJson = {}
@@ -259,8 +258,7 @@ def getItemPatchDataV1(version):  # 패치 정보 웹사이트 접속해서 아�
                     result2.append(change.get_text().strip())
 
                 itemJson['verion'] = version
-                itemJson['name'] = item2.get_text().strip()
-                itemJson['changes'] = list(result2)
+                itemJson[item2.get_text().strip()] = list(result2)
 
                 result.append(itemJson)
 
@@ -273,16 +271,10 @@ def getItemPatchDataV2(version):  # 패치 정보 웹사이트 접속해서 아�
     for item in item_name:
         itemJson = {}
         newItem = item.find_all("h3", {"class", "change-title"})  # 아이템 목록들
-        # print(newItem)
         for item2 in newItem:
             if isItem(item2.get_text()):
                 itemJson = {}
 
-                # before 12-17
-                # changeList = item.find_all(
-                #     "div", {"class", "attribute-change"})
-
-                # after 12-18
                 changeList = item.find_all(
                     "li")
 
@@ -292,8 +284,7 @@ def getItemPatchDataV2(version):  # 패치 정보 웹사이트 접속해서 아�
                     result2.append(change.get_text().strip())
 
                 itemJson['verion'] = version
-                itemJson['name'] = item2.get_text().strip()
-                itemJson['changes'] = list(result2)
+                itemJson[item2.get_text().strip()] = list(result2)
 
                 result.append(itemJson)
 
