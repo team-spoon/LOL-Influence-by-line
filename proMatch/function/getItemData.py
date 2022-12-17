@@ -8,7 +8,7 @@ r = requests.get(getItemListUrl)
 pprint(r.json()['data'])
 
 for i in r.json()['data']:
-  pprint(r.json()['data'][i]['name'])
+    pprint(r.json()['data'][i]['name'])
 
 
 f.close()

@@ -49,15 +49,15 @@ api_key = "RGAPI-936fbe44-a27a-4aaf-96c0-9a9ae3df5159"
 # for i in range(len(league_df)):
 #     try:
 #         nickname = urllib.parse.quote(league_df['summonerName'].iloc[i])
-#         sohwan = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + nickname + '?api_key=' + api_key 
+#         sohwan = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + nickname + '?api_key=' + api_key
 #         r = requests.get(sohwan)
 #         print(sohwan)
 #         print(r.status_code)
 #         while r.status_code == 429:
 #             time.sleep(5)
-#             sohwan = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + league_df['summonerName'].iloc[i] + '?api_key=' + api_key 
+#             sohwan = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + league_df['summonerName'].iloc[i] + '?api_key=' + api_key
 #             r = requests.get(sohwan)
-            
+
 #         account_id = r.json()['puuid']
 #         league_df.iloc[i, -1] = account_id
 
@@ -67,9 +67,9 @@ api_key = "RGAPI-936fbe44-a27a-4aaf-96c0-9a9ae3df5159"
 # league_df.to_csv("챌데이터.csv", index=False, encoding="utf-8")  # 중간저장
 
 
-# TODO - 챌데이터 시간 단위 뭔지 알아보기   
-f = open('챌데이터.csv','r')
-challengerData = pd.DataFrame(csv.reader(f)) # 챌유저 puuid 저장된 csv
+# TODO - 챌데이터 시간 단위 뭔지 알아보기
+f = open('챌데이터.csv', 'r')
+challengerData = pd.DataFrame(csv.reader(f))  # 챌유저 puuid 저장된 csv
 puuid = challengerData[9]
 
 match_info_df = pd.DataFrame()
@@ -84,11 +84,11 @@ for i in range(1, len(puuid)):
         matchUrl = f'https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{nowPuuid}/ids?count=100&api_key={api_key}'
 
         r = requests.get(matchUrl)
-        json = list(r.json()) # matchId 100개를 받아와서 for loop
+        json = list(r.json())  # matchId 100개를 받아와서 for loop
         for challengermatchId in json:
-            result['matchId'].append(challengermatchId) # matchId 행에 추가
+            result['matchId'].append(challengermatchId)  # matchId 행에 추가
 
-        while r.status_code == 429: # 호출 limit 예외처리
+        while r.status_code == 429:  # 호출 limit 예외처리
             time.sleep(5)
             sohwan = f'https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/{nowPuuid}/ids?count=100&api_key={api_key}'
             r = requests.get(sohwan)

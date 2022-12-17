@@ -258,6 +258,7 @@ def getItemPatchDataV1(version):  # 패치 정보 웹사이트 접속해서 아�
                 for change in changeList:
                     result2.append(change.get_text().strip())
 
+                itemJson['verion'] = version
                 itemJson['name'] = item2.get_text().strip()
                 itemJson['changes'] = list(result2)
 
@@ -290,6 +291,7 @@ def getItemPatchDataV2(version):  # 패치 정보 웹사이트 접속해서 아�
                 for change in changeList:
                     result2.append(change.get_text().strip())
 
+                itemJson['verion'] = version
                 itemJson['name'] = item2.get_text().strip()
                 itemJson['changes'] = list(result2)
 
